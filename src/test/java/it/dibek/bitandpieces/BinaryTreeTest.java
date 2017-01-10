@@ -42,7 +42,7 @@ public class BinaryTreeTest {
 
 
 
-        assertThat("The result of traverse is" ,binaryTree.inOrderTraverseTree(nodeToVisit) ,
+        assertThat("The result of traverse is" ,binaryTree.inOrderTraverseTree(nodeToVisit,"") ,
                 equalTo(" " +
                         "-> Root " +
                         "-> A " +
@@ -68,7 +68,7 @@ public class BinaryTreeTest {
 
         String[] sortArray = new String[5];
 
-        String firstElement = binaryTree.getIndexReverseSorted(nodeToVisit,sortArray,4)[0];
+        String firstElement = binaryTree.getIndexReverseSorted(nodeToVisit,sortArray,4,"")[0];
 
         assertThat("The result of traverse is" ,firstElement ,
                 equalTo("D"));

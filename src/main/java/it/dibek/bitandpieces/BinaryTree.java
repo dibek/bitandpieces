@@ -40,15 +40,15 @@ public class BinaryTree<T> {
     // Recursion is used to go to one node and
     // then go to its child nodes and so forth
 
-    public String inOrderTraverseTree(Node focusNode) {
+    public String inOrderTraverseTree(Node focusNode, String nodeVisited) {
 
-        String nodeVisited = "";
+
 
         if (focusNode != null) {
 
             // Traverse the left node
 
-            nodeVisited+= inOrderTraverseTree(focusNode.leftChild);
+            nodeVisited = inOrderTraverseTree(focusNode.leftChild,nodeVisited);
 
             // Visit the currently focused on node
 
@@ -58,7 +58,7 @@ public class BinaryTree<T> {
 
             // Traverse the right node
 
-            nodeVisited+= inOrderTraverseTree(focusNode.rightChild);
+            nodeVisited = inOrderTraverseTree(focusNode.rightChild,nodeVisited);
 
         }
 
@@ -68,9 +68,9 @@ public class BinaryTree<T> {
     // Recursion is used to go to one node and
     // then go to its child nodes and so forth
 
-    public T[] getIndexReverseSorted(Node<T> focusNode, T[] sortArray, int countItem) {
+    public T[] getIndexReverseSorted(Node<T> focusNode, T[] sortArray, int countItem, String nodeVisited) {
 
-        String nodeVisited = "";
+
 
 
 
@@ -78,7 +78,7 @@ public class BinaryTree<T> {
 
             // Traverse the left node
 
-            nodeVisited+= getIndexReverseSorted(focusNode.leftChild,sortArray,countItem);
+            nodeVisited+= getIndexReverseSorted(focusNode.leftChild,sortArray,countItem,nodeVisited);
 
             // Visit the currently focused on node
 
@@ -87,7 +87,7 @@ public class BinaryTree<T> {
             nodeVisited+= focusNode;
             sortArray[countItem--] = focusNode.value;
 
-            nodeVisited+= getIndexReverseSorted(focusNode.rightChild ,sortArray,countItem);
+            nodeVisited+= getIndexReverseSorted(focusNode.rightChild ,sortArray,countItem,nodeVisited);
 
 
         }

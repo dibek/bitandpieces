@@ -1,6 +1,5 @@
 package it.dibek.bitandpieces;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -17,27 +16,27 @@ public class BinaryTreeTest {
 
         // given
         BinaryTree binaryTree = new BinaryTree();
-        binaryTree.addNode(null,1);
-        binaryTree.addNode(binaryTree.findNode(1), 2);
+        binaryTree.addNode(null,1,"Root");
+        binaryTree.addNode(binaryTree.findNode(1), 2,"A");
 
         assertTrue(binaryTree.findNode(2).name.equals("rightOf1"));
 
     }
 
+
     @Test
     public void canTreaverseTreeInOrder() {
         // given
-        BinaryTree binaryTree = new BinaryTree();
-        binaryTree.addNode(null,-1);
+        BinaryTree<String> binaryTree = new BinaryTree<>();
+        binaryTree.addNode(null,-1,"Root");
         Node root = binaryTree.findNode(-1);
-        binaryTree.addNode(root,10);
-        binaryTree.addNode(root,20);
-
-        binaryTree.addNode(root,30);
-        binaryTree.addNode(root,40);
-        binaryTree.addNode(root,25);
-        binaryTree.addNode(root,15);
-        binaryTree.addNode(root,5);
+        binaryTree.addNode(root,10,"B");
+        binaryTree.addNode(root,40,"G");
+        binaryTree.addNode(root,30,"F");
+        binaryTree.addNode(root,20, "D");
+        binaryTree.addNode(root,25,"E");
+        binaryTree.addNode(root,15,"C");
+        binaryTree.addNode(root,5,"A");
 
         Node nodeToVisit = binaryTree.findNode(-1);
 
@@ -45,38 +44,36 @@ public class BinaryTreeTest {
 
         assertThat("The result of traverse is" ,binaryTree.inOrderTraverseTree(nodeToVisit) ,
                 equalTo(" " +
-                        "-> Root has the key -1 " +
-                        "-> leftOf10 has the key 5 " +
-                        "-> rightOf-1 has the key 10 " +
-                        "-> leftOf20 has the key 15 " +
-                        "-> rightOf10 has the key 20 " +
-                        "-> leftOf30 has the key 25 " +
-                        "-> rightOf20 has the key 30 " +
-                        "-> rightOf30 has the key 40"));
+                        "-> Root " +
+                        "-> A " +
+                        "-> B " +
+                        "-> C " +
+                        "-> D " +
+                        "-> E " +
+                        "-> F " +
+                        "-> G"));
     }
     @Test
-    @Ignore
-    public void canTreaverseTreeInReverseOrder() {
+    public void canGetAReverseIndex() {
         // given
-        BinaryTree binaryTree = new BinaryTree();
-        binaryTree.addNode(null,1);
-        binaryTree.addNode(binaryTree.root, 2);
-        binaryTree.addNode(binaryTree.root,3);
+        BinaryTree<String> binaryTree = new BinaryTree<>();
+        binaryTree.addNode(null,1,"Root");
+        binaryTree.addNode(binaryTree.root, 2,"A");
+        binaryTree.addNode(binaryTree.root,3,"B");
 
-        binaryTree.addNode(binaryTree.root,4);
-        binaryTree.addNode(binaryTree.root,5);
+        binaryTree.addNode(binaryTree.root,4,"C");
+        binaryTree.addNode(binaryTree.root,5,"D");
 
-        Node nodeToVisit = binaryTree.findNode(5);
+        Node<String> nodeToVisit = binaryTree.findNode(1);
 
+        String[] sortArray = new String[5];
 
+        String firstElement = binaryTree.getIndexReverseSorted(nodeToVisit,sortArray,4)[0];
 
-        assertThat("The result of traverse is" ,binaryTree.reverseOrderTraverseTree(nodeToVisit) ,
-                equalTo(" " +
-                        "-> Root has the key 1 " +
-                        "-> leftNode has the key 2 " +
-                        "-> rightNode has the key 3 " +
-                        "-> leftNode2Row has the key 4 " +
-                        "-> rightNode2Row has the key 5"));
+        assertThat("The result of traverse is" ,firstElement ,
+                equalTo("D"));
     }
+
+
 
 }

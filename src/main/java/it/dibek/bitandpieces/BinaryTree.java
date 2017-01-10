@@ -1,123 +1,40 @@
 package it.dibek.bitandpieces;
 
-public class BinaryTree {
+public class BinaryTree<T> {
 
     Node root;
 
 
 
-    public void addNode(Node node, int key) {
+    public void addNode(Node node, int key, T value) {
 
         if (this.root == null)
         {
-            this.root = new Node(key,"Root");
+            this.root = new Node(key,"Root",value);
             node = this.root;
         }
 
     if (key < node.key) {
       if (node.leftChild != null) {
-        addNode(node.leftChild, key);
+        addNode(node.leftChild, key,value);
       } else {
         System.out.println("  Inserted " + key + " to left of "
             + node.key);
-        node.leftChild = new Node(key, "leftOf" + node.key);
+        node.leftChild = new Node(key, "leftOf" + node.key,value);
       }
     } else if (key > node.key) {
       if (node.rightChild != null) {
-        addNode(node.rightChild, key);
+        addNode(node.rightChild, key,value);
       } else {
         System.out.println("  Inserted "  + key + " to right of "
             + node.key);
-        node.rightChild = new Node(key, "rightOf" + node.key);
+        node.rightChild = new Node(key, "rightOf" + node.key,value);
       }
     }
   }
-/*
-  public void printInOrder(Node node) {
-    if (node != null) {
-      printInOrder(node.left);
-      System.out.println("  Traversed " + node.value);
-      printInOrder(node.right);
-    }
-  }
 
 
 
-
-    public void addNode(int key, String name) {
-
-        // Create a new Node and initialize it
-
-        Node newNode = new Node(key, name);
-
-        // If there is no root this becomes root
-
-        if (root == null) {
-
-            root = newNode;
-
-        } else {
-
-            // Set root as the Node we will start
-            // with as we traverse the tree
-
-            Node focusNode = root;
-
-            // Future parent for our new Node
-
-            Node parent;
-
-            while (true) {
-
-                // root is the top parent so we start
-                // there
-
-                parent = focusNode;
-
-                // Check if the new node should go on
-                // the left side of the parent node
-
-                if (key < focusNode.key) {
-
-                    // Switch focus to the left child
-
-                    focusNode = focusNode.leftChild;
-
-                    // If the left child has no children
-
-                    if (focusNode == null) {
-
-                        // then place the new node on the left of it
-
-                        parent.leftChild = newNode;
-                        newNode.parent = parent;
-                        return; // All Done
-
-                    }
-
-                } else { // If we get here put the node on the right
-
-                    focusNode = focusNode.rightChild;
-
-                    // If the right child has no children
-
-                    if (focusNode == null) {
-
-                        // then place the new node on the right of it
-
-                        parent.rightChild = newNode;
-                        newNode.parent = parent;
-                        return; // All Done
-
-                    }
-
-                }
-
-            }
-        }
-
-    }
-    */
 
     // All nodes are visited in ascending order
     // Recursion is used to go to one node and
@@ -151,27 +68,32 @@ public class BinaryTree {
     // Recursion is used to go to one node and
     // then go to its child nodes and so forth
 
-    public String reverseOrderTraverseTree(Node focusNode) {
+    public T[] getIndexReverseSorted(Node<T> focusNode, T[] sortArray, int countItem) {
 
         String nodeVisited = "";
+
+
 
         if (focusNode != null) {
 
             // Traverse the left node
 
-            nodeVisited+= inOrderTraverseTree(focusNode.parent);
+            nodeVisited+= getIndexReverseSorted(focusNode.leftChild,sortArray,countItem);
 
             // Visit the currently focused on node
 
             System.out.println(focusNode);
 
             nodeVisited+= focusNode;
+            sortArray[countItem--] = focusNode.value;
 
+            nodeVisited+= getIndexReverseSorted(focusNode.rightChild ,sortArray,countItem);
 
 
         }
 
-        return nodeVisited;
+
+        return (T[]) sortArray;
     }
     public String preorderTraverseTree(Node focusNode) {
 
@@ -189,17 +111,22 @@ public class BinaryTree {
         return nodeVisited;
     }
 
-    public void postOrderTraverseTree(Node focusNode) {
+    public String postOrderTraverseTree(Node focusNode) {
+
+        String nodeVisited = "";
 
         if (focusNode != null) {
+
+            nodeVisited+= focusNode;
 
             postOrderTraverseTree(focusNode.leftChild);
             postOrderTraverseTree(focusNode.rightChild);
 
             System.out.println(focusNode);
 
-        }
 
+        }
+        return nodeVisited;
     }
 
     public Node findNode(int key) {
@@ -247,30 +174,27 @@ public class BinaryTree {
     }
 }
 
-class Node {
+class Node<T> {
 
     int key;
     String name;
+    T value;
 
-    Node leftChild;
-    Node rightChild;
-    Node parent;
+    Node<T> leftChild;
+    Node<T> rightChild;
 
-    Node(int key, String name) {
+
+    Node(int key, String name,T value) {
 
         this.key = key;
         this.name = name;
+        this.value = value;
 
     }
 
     public String toString() {
 
-        return " -> " + name + " has the key " + key;
-
-		/*
-		 * return name + " has the key " + key + "\nLeft Child: " + leftChild +
-		 * "\nRight Child: " + rightChild + "\n";
-		 */
+        return " -> " + value ;
 
     }
 

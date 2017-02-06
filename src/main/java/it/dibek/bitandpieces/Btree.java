@@ -1,9 +1,7 @@
 package it.dibek.bitandpieces;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -16,6 +14,11 @@ public class Btree {
 
 
     Queue<String> myQueue = new ConcurrentLinkedQueue<>();
+
+    ConcurrentHashMap<String,String> concurrentHashMap = new ConcurrentHashMap<>();
+
+    Map<String,String> map = new HashMap<>();
+
 
 
 

@@ -14,35 +14,35 @@ public class FibonacciTest {
     @Test
     public void fibonaacciWithoutCache(){
 
-        assertThat("The fibonacci number" , Fibonacci.fib(5) , equalTo(8));
+        assertThat("The fibonacci number" , Fibonacci.fib(5L) , equalTo(8L));
 
     }
 
     @Test
     public void fibonaacciWithoutCacheMediumSize(){
 
-        assertThat("The fibonacci number" , Fibonacci.fib(20) , equalTo(10946));
+        assertThat("The fibonacci number" , Fibonacci.fib(20L) , equalTo(10946L));
 
     }
 
     @Test
     public void fibonacciWithCache() {
-        assertThat("The fibonacci number" , Fibonacci.fibCache(5l,null) , equalTo(8));
-        Integer[] cache = new Integer[6];
+        assertThat("The fibonacci number" , Fibonacci.fibCache(5l,null) , equalTo(8L));
+        Long[] cache = new Long[6];
         Fibonacci.fibCache(5l,cache);
-        assertThat("The fibonacci number" , cache[2] , equalTo(2));
-        assertThat("The fibonacci number" , cache[3] , equalTo(3));
-        assertThat("The fibonacci number" , cache[4] , equalTo(5));
-        assertThat("The fibonacci number" , cache[5] , equalTo(8));
+        assertThat("The fibonacci number" , cache[2] , equalTo(2L));
+        assertThat("The fibonacci number" , cache[3] , equalTo(3L));
+        assertThat("The fibonacci number" , cache[4] , equalTo(5L));
+        assertThat("The fibonacci number" , cache[5] , equalTo(8L));
     }
     @Test
     public void fibonacciWithCacheMediumSize() {
-        assertThat("The fibonacci number" , Fibonacci.fibCache(20l,null) , equalTo(10946));
+        assertThat("The fibonacci number" , Fibonacci.fibCache(20l,null) , equalTo(10946L));
 
     }
     @Test
     public void fibonacciWithCacheBigSize() {
-        assertThat("The fibonacci number" , Fibonacci.fibCache(100l,null) , equalTo(1869596475));
+        assertThat("The fibonacci number" , Fibonacci.fibCache(100l,null) , equalTo(1298777728820984005L));
 
     }
 

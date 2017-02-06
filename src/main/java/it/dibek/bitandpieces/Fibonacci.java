@@ -5,18 +5,18 @@ package it.dibek.bitandpieces;
  */
 public class Fibonacci {
 
-    public static int fib(long fNumber){
+    public static Long fib(Long fNumber){
         if (fNumber <=1) {
             System.out.println(fNumber + "->");
-            return 1;
+            return 1L;
         }
         System.out.println(fNumber + "->");
         return fib(fNumber -1) + fib(fNumber -2);
     }
 
-    public static int fibCache(Long fNumber,Integer[] cache){
+    public static Long fibCache(Long fNumber,Long[] cache){
         if (cache == null) {
-            cache = new Integer[fNumber.intValue()+1];
+            cache = new Long[fNumber.intValue()+1];
         }
 
         if (cache[fNumber.intValue()] != null) {
@@ -24,9 +24,9 @@ public class Fibonacci {
             return cache[fNumber.intValue()];
         }
         if (fNumber <=1) {
-            cache[fNumber.intValue()] = 1;
+            cache[fNumber.intValue()] = 1L;
             System.out.println(fNumber + "->");
-            return 1;
+            return 1L;
         }
 
 
@@ -35,7 +35,7 @@ public class Fibonacci {
     }
 
     public void main(String[] args) {
-        int fNumber = Integer.valueOf(args[1]);
+        Long fNumber = Long.valueOf(args[1]);
         Fibonacci.fib(fNumber);
     }
 }

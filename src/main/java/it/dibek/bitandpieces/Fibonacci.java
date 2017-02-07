@@ -14,13 +14,13 @@ public class Fibonacci {
         return fib(fNumber -1) + fib(fNumber -2);
     }
 
-    public static Long fibCache(Long fNumber,Long[] cache){
+    public static Long fibCacheLong(Long fNumber, Long[] cache) throws Exception{
         if (cache == null) {
             cache = new Long[fNumber.intValue()+1];
         }
 
         if (cache[fNumber.intValue()] != null) {
-            System.out.println(fNumber + "-> in Cache");
+            System.out.println(fNumber + "-> in Cache with value " + cache[fNumber.intValue()]);
             return cache[fNumber.intValue()];
         }
         if (fNumber <=1) {
@@ -30,9 +30,33 @@ public class Fibonacci {
         }
 
 
-        cache[fNumber.intValue()] = fibCache(fNumber -1,cache) + fibCache(fNumber -2,cache);
+        cache[fNumber.intValue()] = fibCacheLong(fNumber -1,cache) + fibCacheLong(fNumber -2,cache);
+        if (cache[fNumber.intValue()] < 0) {
+            throw new Exception("hit limit for Long for index " + fNumber.intValue());
+        }
         return  cache[fNumber.intValue()];
     }
+
+    public static Double fibCacheDouble(Double fNumber, Double[] cache){
+        if (cache == null) {
+            cache = new Double[fNumber.intValue()+1];
+        }
+
+        if (cache[fNumber.intValue()] != null) {
+            System.out.println(fNumber + "-> in Cache");
+            return cache[fNumber.intValue()];
+        }
+        if (fNumber <=1) {
+            cache[fNumber.intValue()] = 1D;
+            System.out.println(fNumber + "->");
+            return 1D;
+        }
+
+
+        cache[fNumber.intValue()] = fibCacheDouble(fNumber -1,cache) + fibCacheDouble(fNumber -2,cache);
+        return  cache[fNumber.intValue()];
+    }
+
 
     public void main(String[] args) {
         Long fNumber = Long.valueOf(args[1]);

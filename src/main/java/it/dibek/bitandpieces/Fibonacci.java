@@ -14,47 +14,47 @@ public class Fibonacci {
         return fib(fNumber -1) + fib(fNumber -2);
     }
 
-    public static Long fibCacheLong(Long fNumber, Long[] cache) throws Exception{
+    public static Long fibCacheLong(int fNumber, Long[] cache) throws Exception{
         if (cache == null) {
-            cache = new Long[fNumber.intValue()+1];
+            cache = new Long[fNumber+1];
         }
 
-        if (cache[fNumber.intValue()] != null) {
-            System.out.println(fNumber + "-> in Cache with value " + cache[fNumber.intValue()]);
-            return cache[fNumber.intValue()];
+        if (cache[fNumber] != null) {
+            System.out.println(fNumber + "-> in Cache with value " + cache[fNumber]);
+            return cache[fNumber];
         }
         if (fNumber <=1) {
-            cache[fNumber.intValue()] = 1L;
+            cache[fNumber] = 1L;
             System.out.println(fNumber + "->");
             return 1L;
         }
 
 
-        cache[fNumber.intValue()] = fibCacheLong(fNumber -1,cache) + fibCacheLong(fNumber -2,cache);
-        if (cache[fNumber.intValue()] < 0) {
-            throw new Exception("hit limit for Long for index " + fNumber.intValue());
+        cache[fNumber] = fibCacheLong(fNumber -1,cache) + fibCacheLong(fNumber -2,cache);
+        if (cache[fNumber] < 0) {
+            throw new Exception("hit limit for Long for index " + fNumber);
         }
-        return  cache[fNumber.intValue()];
+        return  cache[fNumber];
     }
 
-    public static Double fibCacheDouble(Double fNumber, Double[] cache){
+    public static Double fibCacheDouble(int fNumber, Double[] cache){
         if (cache == null) {
-            cache = new Double[fNumber.intValue()+1];
+            cache = new Double[fNumber+1];
         }
 
-        if (cache[fNumber.intValue()] != null) {
-            System.out.println(fNumber + "-> in Cache");
-            return cache[fNumber.intValue()];
+        if (cache[fNumber] != null) {
+            System.out.println(fNumber + "-> in Cache with value " + cache[fNumber]);
+            return cache[fNumber];
         }
         if (fNumber <=1) {
-            cache[fNumber.intValue()] = 1D;
+            cache[fNumber] = 1D;
             System.out.println(fNumber + "->");
             return 1D;
         }
 
 
-        cache[fNumber.intValue()] = fibCacheDouble(fNumber -1,cache) + fibCacheDouble(fNumber -2,cache);
-        return  cache[fNumber.intValue()];
+        cache[fNumber] = fibCacheDouble(fNumber -1,cache) + fibCacheDouble(fNumber -2,cache);
+        return  cache[fNumber];
     }
 
 

@@ -3,7 +3,9 @@ package it.dibek.bitandpieces;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -28,6 +30,17 @@ public class PrimesTest  {
         List<Integer> listPrimes = Primes.extractPrimes(primesToExtract);
         System.out.println("list primes is " + listPrimes);
         assertTrue(listPrimes.size() > 0 );
+    }
+
+    @Test
+    public void firstTenPrimes() {
+        int primesToExtract = 10;
+        List<Integer> listPrimes = Primes.extractPrimes(primesToExtract);
+        System.out.println("list primes is " + listPrimes);
+        assertTrue(listPrimes.size() > 0 );
+        int[] primes = {1,2,3,5,7,11,13,17,19,23};
+        List<Integer> listPrimesCompare = Arrays.stream(primes).boxed().collect(Collectors.toList());
+        assertTrue(listPrimes.equals(listPrimesCompare));
     }
 
 }

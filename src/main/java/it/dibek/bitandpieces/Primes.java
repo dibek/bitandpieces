@@ -14,7 +14,8 @@ public class Primes {
 
 
     public static boolean isPrime(int number) {
-        for (int i = number-1; i > 1 ; i--) {
+        int maxToEvaluate = ((Double)Math.sqrt(Double.valueOf(number))).intValue();
+        for (int i = maxToEvaluate; i > 1 ; i--) {
             if (number%i == 0) {
                 return false;
             }
